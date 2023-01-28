@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Index</title>
+    <style>
+      /* Add styles for the links */
+      a {
+        color: blue; /* sets the text color to blue */
+        text-decoration: none; /* removes underlining from links */
+      }
+
+      a:hover {
+        color: darkblue; /* sets the text color to dark blue when hovered over */
+        text-decoration: underline; /* adds underlining when hovered over */
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Welcome to Social Media Login</h1>
+    <a href="{{ url_for('facebooklogin') }}">Facebook Login</a>
+    <a href="{{ url_for('Instalogin') }}">Instagram Login</a>
+  <a href="{{ url_for('gmaillogin') }}">Gmail Login</a>
+  </body>
+</html>

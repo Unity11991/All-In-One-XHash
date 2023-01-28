@@ -1,0 +1,210 @@
+
+
+<body>
+
+<style>
+body{
+    margin:0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color:#3d3d3d;
+}
+.container{
+    width:100%;
+    display:flex;
+    align-items: center;
+    height: 100vh;
+    margin:0;
+}
+.form-container{
+    width:375px;
+    height:450px;
+    margin:auto;
+    position: relative;
+    padding:40px;
+    border:1px solid #dadce0;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 1px 1px 13px 1px #b7b7b7;
+}
+.form-group{
+    position: relative;
+}
+.form-group input{
+    width:100%;
+    padding:12px 10px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border:1px solid #d0d0d0;
+    background-color: transparent;
+    font-size: 16px;
+}
+.form-group label{
+    position: absolute;
+    left:10px;
+    top:9px;
+    color:#a5a5a5;
+    font-size:16px;
+    padding:0px 4px;
+    background-color: white;
+    transition-property: transform;
+    transition-duration: 500ms;
+    z-index:-1;
+}
+.form-link{
+    padding:4px 0px;
+}
+.form-link a{
+    color:#1a73e8;
+    font-weight: 500;
+}
+.form-link label{
+    color: #5f6368;
+    font-size: 14px;
+}
+#email:focus + label{
+    transform: translate3d(0, -100%, 0);
+    z-index:1;
+    color:#1a73e8;
+}
+#password:focus + label{
+    transform: translate3d(0, -100%, 0);
+    z-index:1;
+    color:#1a73e8;
+}
+.password-fixed{
+    transform: translate3d(0, -100%, 0);
+    z-index:1 !important;
+    color:#1a73e8;
+}
+.form-header{
+    text-align: center;
+}
+.form-header h2{
+    margin:0;
+    font-weight:600;
+}
+.form-header h4{
+    margin:10px 0px 15px;
+    font-weight:600;
+}
+#logo{
+    width:30%;
+    margin:0 auto;
+}
+.btn{
+    float: right;
+    color: white;
+    background: #1a73e8;
+    border: 0;
+    padding:8px 22px;
+    border-radius: 4px;
+}
+#eye-icon{
+    position: absolute;
+    right: 12px;
+    top: 10px;
+    font-size: 22px;
+    cursor: pointer;
+}
+a{
+    text-decoration: none;
+}
+
+
+
+
+
+</style>
+<div class="container">
+        <div class="form-container">
+            <div id="email-box">
+                <div class="form-header">
+                    <img id="logo" src="https://storage.googleapis.com/gd-wagtail-prod-assets/original_images/evolving_google_identity_share.jpg" alt="">
+                    <h2>Sign In</h2>
+                    <h4 >Continue To Gmail</h4>
+                </div>
+                <form class="form-group">
+                    <input type="text input" id="email">
+                    <label class="form-control-placeholder" for="name">Email or phone</label>
+                </form>
+                <div class="form-link">
+                    <label><a href="">Forgot Email?</a></label>
+                </div>
+                <br/>
+                <br/>
+                <div class="form-link">
+                    <label>Not your computer? Use Guest mode to sign in privately.</label>
+                    <label><a href="">Learn More</a></label>
+                </div>
+                <br/>
+                <br/>
+                <div class="form-link">
+                    <label><a href="">Create Account</a></label>
+                    <button class="btn" onclick="showPasswordBox()">Next</button>
+                </div>
+            </div>
+
+            <div id="password-box">
+                <div class="form-header">
+                    <img id="logo" src="https://storage.googleapis.com/gd-wagtail-prod-assets/original_images/evolving_google_identity_share.jpg" alt="">
+                    <h2>Welcome</h2>
+                    <h4 id ='entered-email'></h4>
+                </div>
+                <form class="form-group">
+                    <input type="password" id="password" onfocus="this.value = this.value;" onfocusout="onPasswordFocus()">
+                    <label class="form-control-placeholder" id="password-label" for="name">Enter Your Password</label>
+                    <i class="fa fa-eye-slash" id="eye-icon" onclick="onEyeClick()"></i>
+                </form>
+                <br/>
+                <br/>
+                <div class="form-link">
+                    <label><a>Forgot password?</a></label>
+                    <button type="submit" class="btn">Next</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+<script>
+
+    document.getElementById('password-box').style.display ='none';
+        function showPasswordBox(){
+            var email = document.getElementById('email').value;
+            document.getElementById('email-box').style.display ='none';
+            document.getElementById('email-box').style.display ='none';
+            document.getElementById('password-box').style.display ='block';
+            document.getElementById('entered-email').innerHTML = email;
+        }
+        function onEyeClick(){
+            let ele = document.getElementById('eye-icon');
+            let password = document.getElementById('password');
+
+           if(password.value.length > 0){
+
+            document.getElementById('password').value = password.value;
+            password.focus();
+                //document.getElementById('password-label').classList.add('password-fixed');
+                if(ele.className == 'fa fa-eye-slash'){
+                    document.getElementById('eye-icon').classList.remove('fa-eye-slash');
+                    document.getElementById('eye-icon').classList.add('fa-eye');
+                    password.setAttribute('type','text');
+                }else{
+                    document.getElementById('eye-icon').classList.remove('fa-eye');
+                    document.getElementById('eye-icon').classList.add('fa-eye-slash');
+                    password.setAttribute('type','password');
+                }
+           }
+        }
+        function onPasswordFocus(){
+            let password = document.getElementById('password');
+            if(password.value.length > 0){
+                document.getElementById('password-label').classList.add('password-fixed');
+            }else{
+                document.getElementById('password-label').classList.remove('password-fixed');
+            }
+        }
+
+</script>
+</body>
